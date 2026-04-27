@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeRush — Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0e0e11;
+            --surface: #16161c;
+            --accent: #f0c040;
+            --accent2: #5bf5b0;
+            --text: #e8e8f0;
+            --muted: #7a7a99;
+            --border: #2a2a3a;
+        }
+
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background grid */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .glow {
+            position: absolute;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(240,192,64,0.12) 0%, transparent 70%);
+            top: -100px; left: -100px;
+            pointer-events: none;
+        }
+        .glow2 {
+            position: absolute;
+            width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(91,245,176,0.08) 0%, transparent 70%);
+            bottom: -80px; right: -80px;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+            padding: 40px;
+        }
+
+        .eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 10vw, 96px);
+            font-weight: 800;
+            line-height: 0.95;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 56px;
+            letter-spacing: 1px;
+        }
+
+        .modes {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .mode-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 36px;
+            min-width: 200px;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.25s ease;
+        }
+
+        .mode-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .mode-card:hover::after { transform: scaleX(1); }
+
+        .mode-card.tech::after { background: var(--accent2); }
+        .mode-card.tech:hover { border-color: var(--accent2); }
+
+        .mode-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .mode-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .mode-desc {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        .stats-bar {
+            margin-top: 64px;
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .stat-item span {
+            display: block;
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+    <div class="glow2"></div>
+
+    <div class="container">
+        <p class="eyebrow">⌨ &nbsp; test your speed</p>
+        <h1>TYPE<span>RUSH</span></h1>
+        <p class="subtitle">60 seconds. how fast are you?</p>
+
+        <div class="modes">
+            <a href="GEN.html" class="mode-card">
+                <div class="mode-icon">📖</div>
+                <div class="mode-label">General</div>
+                <div class="mode-desc">prose &amp; stories</div>
+            </a>
+            <a href="TECH.html" class="mode-card tech">
+                <div class="mode-icon">💻</div>
+                <div class="mode-label">Technical</div>
+                <div class="mode-desc">code &amp; CS terms</div>
+            </a>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span>60s</span>
+                timer
+            </div>
+            <div class="stat-item">
+                <span>WPM</span>
+                tracked
+            </div>
+            <div class="stat-item">
+                <span>20+</span>
+                passages
+            </div>
+        </div>
+    </div>
+</body>
+</html>

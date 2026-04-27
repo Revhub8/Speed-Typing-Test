@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeRush — Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0e0e11;
+            --surface: #16161c;
+            --surface2: #1e1e28;
+            --accent: #f0c040;
+            --accent2: #5bf5b0;
+            --text: #e8e8f0;
+            --muted: #7a7a99;
+            --border: #2a2a3a;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 48px 56px;
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+        }
+
+        .badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: var(--text);
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .metric {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .metric-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .metric-value.highlight { color: var(--accent); }
+        .metric-value.green { color: var(--accent2); }
+
+        .metric-unit {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #0e0e11;
+        }
+        .btn-primary:hover { background: #f5d060; transform: translateY(-1px); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { color: var(--text); border-color: var(--text); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <p class="badge">✓ &nbsp; test complete</p>
+        <h1>Your Results</h1>
+
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-label">WPM</div>
+                <div class="metric-value highlight" id="wpm">—</div>
+                <div class="metric-unit">words/min</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Accuracy</div>
+                <div class="metric-value green" id="accuracy">—</div>
+                <div class="metric-unit">percent</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Mistakes</div>
+                <div class="metric-value" id="mistakes">—</div>
+                <div class="metric-unit">total errors</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Error Rate</div>
+                <div class="metric-value" id="errorPercentage">—</div>
+                <div class="metric-unit">percent</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="history.back()">↺ &nbsp; Try Again</button>
+            <button class="btn btn-secondary" onclick="window.location.href='HOME.html'">← &nbsp; Home</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const keys = ["wpm", "mistakes", "accuracy", "errorPercentage"];
+            keys.forEach(key => {
+                const val = localStorage.getItem(key);
+                const el = document.getElementById(key);
+                if (el && val !== null) el.innerText = val;
+            });
+        });
+    </script>
+</body>
+</html>
